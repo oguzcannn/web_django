@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends "header.html" %}
+{% load static %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div>
+        <ul class="coach-list">
+            <li class="coach"><button class="gopost" style="width: 100%; background-color: var(--coach-green); border-style: inherit; border-radius: 10px;" 
+            onclick="location.href=`{% url 'postCall' %}`"> Tüm Postlar &#11166;</button></li>
+            {% for koc in Coachs%}
+            <li class="coach">
+                <div class="coach-img">
+                    <img src="{{ koc.Coachİmage.url }}" alt="">
+                </div>
+                <div class="coach-name">
+                    <h1>{{koc.Kullanici.first_name}} {{koc.Kullanici.last_name}}</h1>
+                    <span>
+                        {{ koc.CoachLeague }}
+                    </span>
+                    <span class="coach-contact">
+                        <button type="button" onclick="location.href='https://mail.google.com/mail/?view=cm&fs=1&to={{koc.Kullanici.email}}'">
+                            İletişim:<i class="fa-regular fa-envelope"></i> {{koc.Kullanici.email}}
+                        </button>
+                    </span>
+                </div>
+                <button class="gopost hover-black" onclick="location.href=`{% url 'postCall' %}?Coach={{ koc.id }}`">Postlar &#11166;</button>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+{% endblock content %}
+</html>
